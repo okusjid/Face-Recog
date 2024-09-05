@@ -1,29 +1,28 @@
-import cv2
-import os
 import aiohttp
-from PIL import Image
+import cv2
+from PIL import Image, UnidentifiedImageError
 from io import BytesIO
-import face_recognition
-
+import numpy as np
 from app.config import Config
 
+# Fetch the image from a URL using aiohttp and return a PIL Image
 async def fetch_image(url: str) -> Image:
     async with aiohttp.ClientSession() as session:
         async with session.get(url, headers={"User-Agent": Config.USER_AGENT}) as response:
             if response.status == 200:
                 image_data = await response.read()
-                image = Image.open(BytesIO(image_data))
-                return image
+                try:
+                    image = Image.open(BytesIO(image_data))
+                    return image
+                except UnidentifiedImageError:
+                    print(f"Failed to identify image from {url}")
     return None
 
+# Save the image to the specified file path
 def save_image(image: Image, file_path: str):
     image.save(file_path)
 
-def has_single_face(image: Image) -> bool:
-    image_array = face_recognition.load_image_file(BytesIO(image.tobytes()))
-    face_locations = face_recognition.face_locations(image_array)
-    return len(face_locations) == 1
-
+# Detect if an image contains exactly one face using OpenCV
 def has_single_face(image):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

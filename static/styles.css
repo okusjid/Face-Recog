@@ -6,53 +6,96 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .container {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
     text-align: center;
+    margin: 20px;
 }
 
-h1 {
+h1, h2 {
     font-size: 24px;
-    margin-bottom: 20px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    color: #555;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
 }
 
 button {
     background-color: #60c1e0;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 button:hover {
     background-color: #4a9cbf;
 }
 
-#result {
+.loading {
     margin-top: 20px;
     font-size: 16px;
-    color: green;
+    color: #555;
+}
+
+.hidden {
+    display: none;
+}
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-grid img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.image-grid img:hover {
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        padding: 15px;
+        width: 90%;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }

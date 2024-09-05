@@ -7,15 +7,25 @@
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
-    <div class="container">
+    <section class="container">
         <h1>Start Image Scraping Task</h1>
         <form id="scrape-form">
             <label for="query">Enter Search Query:</label>
-            <input type="text" id="query" name="query" required>
-            <button type="submit">Start Task</button>
+            <input type="text" id="query" name="query" placeholder="e.g., mountain landscape" required autofocus>
+            <button type="submit" id="submit-btn">Start Task</button>
         </form>
-        <div id="result"></div>
-    </div>
+        <div id="loading" class="loading hidden">Processing...</div>
+        <div id="result" aria-live="polite"></div>
+
+        <div class="images-section">
+            <h2>Unprocessed Images</h2>
+            <div id="unprocessed-images" class="image-grid"></div>
+
+            <h2>Processed Images</h2>
+            <div id="processed-images" class="image-grid"></div>
+        </div>
+    </section>
+
     <script src="../static/script.js"></script>
 </body>
 </html>
